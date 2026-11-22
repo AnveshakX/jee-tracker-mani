@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#2563eb"><meta name="description" content="JEE Main 2027 study tracker">
+<link rel="manifest" href="manifest.webmanifest">
+<title>JEE Tracker 2027</title>
+<style>
+:root{--blue:#2563eb;--blue2:#1d4ed8;--ink:#14213d;--muted:#64748b;--line:#e2e8f0;--bg:#f4f7fc;--card:#fff;--soft:#eff6ff;--green:#15803d;--red:#b91c1c;--shadow:0 10px 30px rgba(30,64,175,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#172033}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{max-width:1200px;margin:auto;padding:20px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#2563eb,#60a5fa);display:grid;place-items:center;color:white;font-weight:900;font-size:19px;box-shadow:var(--shadow)}
+h1{font-size:21px;margin:0;color:var(--ink)}.sub{font-size:12px;color:var(--muted);margin-top:3px}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:white;color:var(--ink);padding:10px 13px;border-radius:11px;font-weight:650}.btn.primary{background:var(--blue);border-color:var(--blue);color:white}.btn:hover{filter:brightness(.97)}
+.hero{background:linear-gradient(120deg,#fff 0%,#edf4ff 100%);border:1px solid #dbeafe;border-radius:22px;padding:24px;box-shadow:var(--shadow);display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px}
+.eyebrow{font-size:11px;letter-spacing:1.5px;color:var(--blue);font-weight:800}.hero h2{font-size:clamp(23px,4vw,34px);line-height:1.1;color:var(--ink);margin:8px 0}.hero p{color:var(--muted);margin:0;max-width:580px}.hero-stat{text-align:right;min-width:120px}.hero-stat strong{font-size:36px;color:var(--blue);display:block}.hero-stat span{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;box-shadow:var(--shadow)}.metric-label{font-size:12px;color:var(--muted);font-weight:650}.metric{font-size:27px;font-weight:850;color:var(--ink);margin:7px 0 2px}.metric-note{font-size:11px;color:var(--muted)}
+.progress{height:8px;background:#e8eef8;border-radius:20px;overflow:hidden;margin-top:10px}.progress span{height:100%;display:block;background:linear-gradient(90deg,#2563eb,#60a5fa);border-radius:20px}
+.subject-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:20px}.subject-card{background:white;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow);cursor:pointer;transition:.15s}.subject-card:hover{transform:translateY(-2px);border-color:#93c5fd}.subject-top{display:flex;align-items:center;justify-content:space-between}.subject-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px}.physics{background:#dbeafe}.chemistry{background:#ccfbf1}.math{background:#ede9fe}.subject-card h3{margin:12px 0 3px;color:var(--ink)}.subject-card small{color:var(--muted)}.subject-bottom{display:flex;justify-content:space-between;margin-top:12px;font-size:12px;color:var(--muted)}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 12px}.section-head h2{font-size:18px;margin:0;color:var(--ink)}.section-head p{font-size:12px;color:var(--muted);margin:4px 0 0}
+.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:var(--shadow)}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}.toolbar input,.toolbar select,.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:10px;padding:10px;background:white;color:var(--ink);min-width:0}.toolbar input{flex:1;min-width:180px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap}.tab{padding:9px 13px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--muted);font-weight:700}.tab.active{background:var(--soft);border-color:#93c5fd;color:var(--blue)}
+.chapter-list{display:grid;gap:9px}.chapter{border:1px solid var(--line);border-radius:14px;padding:13px;display:grid;grid-template-columns:minmax(180px,1.5fr) repeat(3,minmax(70px,.55fr)) minmax(120px,.8fr);gap:10px;align-items:center}.chapter h4{margin:0;font-size:13px;color:var(--ink)}.chapter small{color:var(--muted);font-size:11px}.tick{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:650}.tick input{width:17px;height:17px;accent-color:var(--blue)}.status{width:100%;border:1px solid var(--line);border-radius:9px;padding:8px;background:#fff;font-size:11px}
+.badge{font-size:10px;padding:4px 7px;border-radius:99px;background:#f1f5f9;color:#475569;font-weight:750}.badge.done{background:#dcfce7;color:#166534}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}.field label{font-size:11px;color:var(--muted);font-weight:700}.field textarea{min-height:70px;resize:vertical}
+.empty{text-align:center;color:var(--muted);padding:24px}
+footer{text-align:center;color:#94a3b8;font-size:11px;padding:24px 0}
+.hidden{display:none!important}
+@media(max-width:850px){.cards{grid-template-columns:repeat(2,1fr)}.subject-grid{grid-template-columns:1fr}.chapter{grid-template-columns:1fr 1fr 1fr}.chapter-main{grid-column:1/-1}.status-wrap{grid-column:1/-1}.hero-stat{display:none}}
+@media(max-width:520px){.app{padding:13px}.hero{padding:18px}.cards{gap:8px}.card{padding:12px}.metric{font-size:23px}.chapter{grid-template-columns:1fr 1fr}.tick{font-size:10px}.header-actions .btn{padding:8px;font-size:11px}}
+
+/* Feature modules */
+.nav-pills{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 12px}
+.nav-pills button{border:1px solid var(--line);background:#fff;color:var(--muted);padding:9px 12px;border-radius:10px;font-weight:700;font-size:12px}
+.nav-pills button.active{background:var(--soft);border-color:#93c5fd;color:var(--blue)}
+.feature-section{margin:14px 0 22px}
+.feature-section h2{font-size:18px;color:var(--ink);margin:0 0 5px}
+.feature-section .hint{font-size:12px;color:var(--muted);margin:0 0 12px}
+.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.feature-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:16px;box-shadow:var(--shadow);min-width:0}
+.feature-card h3{font-size:14px;margin:0 0 12px;color:var(--ink)}
+.form-row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
+.form-row .field{flex:1;min-width:120px;margin:0 0 9px}
+.form-row .field input,.form-row .field select,.form-row .field textarea{width:100%}
+.small-btn{padding:8px 10px;font-size:11px;border-radius:9px}
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th,.data-table td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.data-table th{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.4px}
+.table-wrap{overflow:auto;max-width:100%}
+.tag{display:inline-block;border-radius:99px;background:var(--soft);color:var(--blue);padding:4px 7px;font-size:10px;font-weight:750}
+.task-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:12px}
+.task-row:last-child{border:0}.task-row input{accent-color:var(--blue);width:17px;height:17px}
+.widget-preview{background:linear-gradient(135deg,#eff6ff,#fff);border:1px solid #bfdbfe;border-radius:16px;padding:14px}
+.widget-preview .widget-top{display:flex;justify-content:space-between;align-items:center;color:var(--blue);font-weight:800;font-size:11px}
+.widget-preview .count{font-size:29px;font-weight:900;color:var(--ink);margin:6px 0}
+.widget-preview .widget-line{font-size:12px;color:var(--muted);margin-top:5px}
+.bar-chart{display:flex;align-items:end;gap:9px;height:150px;padding:12px 5px 0;border-bottom:1px solid var(--line)}
+.bar-col{flex:1;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:5px}
+.bar{width:min(32px,75%);min-height:3px;background:linear-gradient(180deg,#60a5fa,#2563eb);border-radius:7px 7px 0 0}
+.bar-col small{font-size:9px;color:var(--muted);white-space:nowrap}
+.progress-line{height:7px;background:#e8eef8;border-radius:10px;overflow:hidden}.progress-line span{display:block;height:100%;background:#3b82f6}
+.reminder-item{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12px}
+.reminder-item:last-child{border:0}
+@media(max-width:700px){.feature-grid{grid-template-columns:1fr}.nav-pills{position:sticky;top:0;background:var(--bg);z-index:3;padding:7px 0}.nav-pills button{flex:1;min-width:27%}.data-table{min-width:450px}}
+
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="brand"><div class="logo">J27</div><div><h1>JEE TRACKER 2027</h1><div class="sub">Your preparation. Your pace. Your progress.</div></div></div>
+ <div class="header-actions"><button class="btn" id="installBtn" hidden>Install app</button><button class="btn" id="exportBtn">Export backup</button><button class="btn" id="importBtn">Import</button><input type="file" id="importFile" accept="application/json" hidden></div>
+</header>
+<section class="hero">
+ <div><div class="eyebrow">THE ROAD TO JEE 2027</div><h2>Small steps.<br>Big results.</h2><p>Track theory, PYQs and revision across Physics, Chemistry and Mathematics. Every checked task moves you forward.</p></div>
+ <div class="hero-stat"><strong id="heroPercent">0%</strong><span>OVERALL COMPLETION</span></div>
+</section>
+
+<section class="feature-grid" style="margin-bottom:14px">
+ <div class="feature-card">
+  <h3>JEE MAIN 2027 COUNTDOWN</h3>
+  <div class="form-row"><div class="field"><label for="examDate">EXAM DATE (SET WHEN OFFICIAL)</label><input type="date" id="examDate"></div><button class="btn primary small-btn" id="saveExamDate">Save date</button></div>
+  <div class="count" id="examCountdown">Set your exam date</div><div class="sub" id="examCountdownNote">The date is editable; no unannounced exam date is assumed.</div>
+ </div>
+ <div class="feature-card">
+  <h3>STUDY STREAK</h3><div class="count" id="streakCount">0 days 🔥</div>
+  <div class="sub" id="streakNote">Complete at least one study task today to build your streak.</div>
+  <div class="progress-line" style="margin-top:12px"><span id="streakBar" style="width:0%"></span></div>
+ </div>
+</section>
+
+<section class="cards">
+ <div class="card"><div class="metric-label">TOTAL CHAPTERS</div><div class="metric" id="totalChapters">62</div><div class="metric-note">Across all three subjects</div></div>
+ <div class="card"><div class="metric-label">CHAPTERS MASTERED</div><div class="metric" id="mastered">0</div><div class="metric-note">Theory + PYQs + revision</div></div>
+ <div class="card"><div class="metric-label">TASKS COMPLETED</div><div class="metric" id="tasksDone">0 / 186</div><div class="metric-note">Three tasks per chapter</div></div>
+ <div class="card"><div class="metric-label">REVISION PENDING</div><div class="metric" id="revisionPending">62</div><div class="metric-note">Chapters still to revise</div></div>
+</section>
+<div class="section-head"><div><h2>Subject dashboard</h2><p>Select a subject to open its chapter tracker.</p></div></div>
+<section class="subject-grid" id="subjectCards"></section>
+<div class="section-head"><div><h2 id="trackerTitle">Chapter tracker</h2><p id="trackerSubtitle">Choose a subject above to get started.</p></div><button class="btn" id="backBtn">Dashboard</button></div>
+<section class="panel hidden" id="trackerPanel">
+ <div class="toolbar">
+  <input id="searchInput" placeholder="Search chapters...">
+  <select id="classFilter"><option value="All">All classes</option><option>Class 11</option><option>Class 12</option></select>
+  <select id="statusFilter"><option value="All">All statuses</option><option>Not Started</option><option>Learning</option><option>Practising</option><option>Revision Due</option><option>Completed</option></select>
+ </div>
+ <div class="tabs"><button class="tab active" data-tab="all">All chapters</button><button class="tab" data-tab="pending">Pending</button><button class="tab" data-tab="completed">Completed</button></div>
+ <div style="height:12px"></div><div class="progress"><span id="subjectProgress" style="width:0%"></span></div>
+ <div class="subject-bottom" style="margin:7px 0 14px"><span id="subjectProgressText">0% completed</span><span id="chapterCount"></span></div>
+ <div class="chapter-list" id="chapterList"></div>
+</section>
+
+<div class="nav-pills" id="featureNav">
+ <button class="active" data-feature="timetable">Daily timetable</button>
+ <button data-feature="tests">Mock tests</button>
+ <button data-feature="targets">Question targets</button>
+ <button data-feature="weightage">Weightage</button>
+ <button data-feature="mistakes">Mistake notebook</button>
+ <button data-feature="revision">Revision reminders</button>
+ <button data-feature="reports">Reports & graphs</button>
+</div>
+
+<section class="feature-section" id="feature-timetable">
+ <h2>Daily timetable</h2><p class="hint">Plan focused study blocks and mark each one complete.</p>
+ <div class="feature-card">
+  <div class="form-row">
+   <div class="field"><label>TIME</label><input type="time" id="ttTime"></div>
+   <div class="field"><label>SUBJECT</label><select id="ttSubject"><option>Physics</option><option>Chemistry</option><option>Mathematics</option></select></div>
+   <div class="field"><label>ACTIVITY</label><input id="ttTask" placeholder="e.g. Current Electricity PYQs"></div>
+   <div class="field"><label>DURATION (MIN)</label><input id="ttDuration" type="number" min="5" step="5" value="60"></div>
+   <button class="btn primary small-btn" id="addTimetable">Add block</button>
+  </div>
+  <div id="timetableList"></div>
+ </div>
+</section>
+
+<section class="feature-section hidden" id="feature-tests">
+ <h2>Mock test marks tracker</h2><p class="hint">Record your scores and review your progress over time.</p>
+ <div class="feature-card">
+  <div class="form-row">
+   <div class="field"><label>TEST DATE</label><input type="date" id="testDate"></div>
+   <div class="field"><label>TEST NAME</label><input id="testName" placeholder="Mock test 01"></div>
+   <div class="field"><label>PHYSICS</label><input type="number" id="testP" min="0" max="100" placeholder=" /100"></div>
+   <div class="field"><label>CHEMISTRY</label><input type="number" id="testC" min="0" max="100" placeholder=" /100"></div>
+   <div class="field"><label>MATHEMATICS</label><input type="number" id="testM" min="0" max="100" placeholder=" /100"></div>
+   <button class="btn primary small-btn" id="addTest">Save test</button>
+  </div>
+  <div class="table-wrap"><table class="data-table"><thead><tr><th>Date</th><th>Test</th><th>Physics</th><th>Chemistry</th><th>Maths</th><th>Total /300</th><th></th></tr></thead><tbody id="testRows"></tbody></table></div>
+ </div>
+</section>
+
+<section class="feature-section hidden" id="feature-targets">
+ <h2>Daily question targets</h2><p class="hint">Set a realistic target for each subject and track today's completed questions.</p>
+ <div class="feature-grid">
+  <div class="feature-card">
+   <div id="targetControls"></div>
+   <div class="form-row"><div class="field"><label>EXTRA NOTES</label><input id="targetNote" placeholder="Topics / question source"></div><button class="btn primary small-btn" id="saveTargets">Save targets</button></div>
+  </div>
+  <div class="feature-card"><h3>Today's question progress</h3><div class="count" id="questionProgress">0 / 0</div><div class="progress-line"><span id="questionBar" style="width:0%"></span></div><p class="sub" id="questionProgressNote"></p></div>
+ </div>
+</section>
+
+<section class="feature-section hidden" id="feature-weightage">
+ <h2>Chapter-wise weightage</h2><p class="hint">Enter counts from the past papers you have analysed, then set your own priority. The app does not invent official weightage or predict future questions.</p>
+ <div class="feature-card">
+  <div class="form-row"><div class="field"><label>SUBJECT</label><select id="weightSubject"><option>Physics</option><option>Chemistry</option><option>Mathematics</option></select></div><div class="field"><label>SEARCH CHAPTER</label><input id="weightSearch" placeholder="Find chapter"></div></div>
+  <div class="table-wrap"><table class="data-table"><thead><tr><th>Chapter</th><th>Past-paper count</th><th>My priority</th><th>Set priority</th></tr></thead><tbody id="weightRows"></tbody></table></div>
+ </div>
+</section>
+
+<section class="feature-section hidden" id="feature-mistakes">
+ <h2>Mistake notebook</h2><p class="hint">Capture the concept, why you missed it, and the action that will prevent a repeat.</p>
+ <div class="feature-card">
+  <div class="form-row">
+   <div class="field"><label>DATE</label><input type="date" id="mistakeDate"></div>
+   <div class="field"><label>SUBJECT</label><select id="mistakeSubject"><option>Physics</option><option>Chemistry</option><option>Mathematics</option></select></div>
+   <div class="field"><label>CHAPTER</label><input id="mistakeChapter" placeholder="Chapter"></div>
+   <div class="field"><label>MISTAKE TYPE</label><select id="mistakeType"><option>Concept gap</option><option>Calculation error</option><option>Misread question</option><option>Time management</option><option>Formula recall</option><option>Guess / strategy</option></select></div>
+  </div>
+  <div class="form-row">
+   <div class="field"><label>WHAT WENT WRONG?</label><textarea id="mistakeWhat" placeholder="Briefly describe the mistake"></textarea></div>
+   <div class="field"><label>WHAT WILL I DO NEXT TIME?</label><textarea id="mistakeFix" placeholder="Write the correction / rule"></textarea></div>
+  </div>
+  <button class="btn primary small-btn" id="addMistake">Add to notebook</button>
+  <div class="table-wrap" style="margin-top:12px"><table class="data-table"><thead><tr><th>Date</th><th>Subject / Chapter</th><th>Type</th><th>Correction</th><th></th></tr></thead><tbody id="mistakeRows"></tbody></table></div>
+ </div>
+</section>
+
+<section class="feature-section hidden" id="feature-revision">
+ <h2>Revision reminders</h2><p class="hint">Add a revision date to any chapter. Due items appear here and in the phone-friendly dashboard widget.</p>
+ <div class="feature-card">
+  <div class="form-row">
+   <div class="field"><label>SUBJECT</label><select id="revSubject"><option>Physics</option><option>Chemistry</option><option>Mathematics</option></select></div>
+   <div class="field"><label>CHAPTER</label><select id="revChapter"></select></div>
+   <div class="field"><label>REVISION DATE</label><input type="date" id="revDate"></div>
+   <button class="btn primary small-btn" id="addRevision">Add reminder</button>
+  </div>
+  <div id="revisionList"></div>
+  <button class="btn small-btn" id="enableNotifications">Allow due-revision alerts while app is open</button><span class="sub" id="notificationStatus"></span>
+ </div>
+</section>
+
+<section class="feature-section hidden" id="feature-reports">
+ <h2>Performance graphs & weekly report</h2><p class="hint">A quick view of your mock-test trend and this week's study activity.</p>
+ <div class="feature-grid">
+  <div class="feature-card"><h3>Mock test score trend</h3><div class="bar-chart" id="scoreChart"></div><div class="sub" id="scoreChartNote">Add mock tests to see your trend.</div></div>
+  <div class="feature-card"><h3>Weekly study report</h3><div class="count" id="weeklyTasks">0</div><div class="sub">Study actions logged in the last 7 days</div><div id="weeklyReportDetails" style="margin-top:10px"></div></div>
+ </div>
+</section>
+
+<section class="feature-section">
+ <h2>Phone revision & countdown widget</h2><p class="hint">This compact panel is designed to stay easy to read on a phone. A true Android/iPhone home-screen widget needs a native companion app; the PWA can show this panel inside the app.</p>
+ <div class="widget-preview">
+  <div class="widget-top"><span>JEE 2027 · DAILY GLANCE</span><span>● LIVE</span></div>
+  <div class="count" id="widgetCountdown">Set exam date</div><div class="widget-line">EXAM COUNTDOWN</div>
+  <div class="widget-line" id="widgetRevision">No revision reminders yet</div>
+  <div class="widget-line" id="widgetFocus">Today's focus: Add a study focus</div>
+ </div>
+</section>
+
+<div class="section-head"><div><h2>Quick study notes</h2><p>Keep your next focus and important reminders in one place.</p></div></div>
+<section class="panel two-col">
+ <div class="field"><label for="focusInput">TODAY'S MAIN FOCUS</label><input id="focusInput" placeholder="e.g. Electrostatics — concepts + 30 PYQs"></div>
+ <div class="field"><label for="dateInput">TARGET DATE</label><input id="dateInput" type="date"></div>
+ <div class="field" style="grid-column:1/-1"><label for="notesInput">NOTES / DOUBTS / REMINDERS</label><textarea id="notesInput" placeholder="Write concepts to revisit, doubts to ask, or test analysis..."></textarea></div>
+ <div><button class="btn primary" id="saveNotes">Save notes</button><span id="savedMsg" class="sub" style="margin-left:8px"></span></div>
+</section>
+<footer>JEE TRACKER 2027 · Your progress is saved on this device. Export a backup regularly.</footer>
+</div>
+<script>
+const CHAPTERS={"Physics": [{"class": "Class 11", "name": "Units and Measurements"}, {"class": "Class 11", "name": "Kinematics"}, {"class": "Class 11", "name": "Laws of Motion"}, {"class": "Class 11", "name": "Work, Energy and Power"}, {"class": "Class 11", "name": "Rotational Motion"}, {"class": "Class 11", "name": "Gravitation"}, {"class": "Class 11", "name": "Properties of Solids and Liquids"}, {"class": "Class 11", "name": "Thermodynamics"}, {"class": "Class 11", "name": "Kinetic Theory of Gases"}, {"class": "Class 11", "name": "Oscillations and Waves"}, {"class": "Class 12", "name": "Electrostatics"}, {"class": "Class 12", "name": "Current Electricity"}, {"class": "Class 12", "name": "Magnetic Effects of Current and Magnetism"}, {"class": "Class 12", "name": "Electromagnetic Induction and Alternating Currents"}, {"class": "Class 12", "name": "Electromagnetic Waves"}, {"class": "Class 12", "name": "Optics"}, {"class": "Class 12", "name": "Dual Nature of Matter and Radiation"}, {"class": "Class 12", "name": "Atoms and Nuclei"}, {"class": "Class 12", "name": "Electronic Devices"}, {"class": "Class 12", "name": "Experimental Skills"}], "Chemistry": [{"class": "Class 11", "name": "Some Basic Concepts of Chemistry"}, {"class": "Class 11", "name": "Atomic Structure"}, {"class": "Class 11", "name": "Chemical Bonding and Molecular Structure"}, {"class": "Class 11", "name": "Chemical Thermodynamics"}, {"class": "Class 11", "name": "Equilibrium"}, {"class": "Class 11", "name": "Redox Reactions"}, {"class": "Class 11", "name": "Classification of Elements and Periodicity in Properties"}, {"class": "Class 11", "name": "Some Basic Principles of Organic Chemistry"}, {"class": "Class 11", "name": "Hydrocarbons"}, {"class": "Class 11", "name": "Purification and Characterisation of Organic Compounds"}, {"class": "Class 12", "name": "Solutions"}, {"class": "Class 12", "name": "Electrochemistry"}, {"class": "Class 12", "name": "Chemical Kinetics"}, {"class": "Class 12", "name": "p-Block Elements"}, {"class": "Class 12", "name": "d- and f-Block Elements"}, {"class": "Class 12", "name": "Coordination Compounds"}, {"class": "Class 12", "name": "Organic Compounds Containing Halogens"}, {"class": "Class 12", "name": "Organic Compounds Containing Oxygen"}, {"class": "Class 12", "name": "Organic Compounds Containing Nitrogen"}, {"class": "Class 12", "name": "Biomolecules"}, {"class": "Class 12", "name": "Principles Related to Practical Chemistry"}], "Mathematics": [{"class": "Class 11", "name": "Sets, Relations and Functions"}, {"class": "Class 11", "name": "Complex Numbers and Quadratic Equations"}, {"class": "Class 11", "name": "Matrices and Determinants"}, {"class": "Class 11", "name": "Permutations and Combinations"}, {"class": "Class 11", "name": "Binomial Theorem"}, {"class": "Class 11", "name": "Sequence and Series"}, {"class": "Class 11", "name": "Limits and Derivatives"}, {"class": "Class 11", "name": "Statistics and Probability"}, {"class": "Class 11", "name": "Trigonometry"}, {"class": "Class 11", "name": "Straight Lines"}, {"class": "Class 11", "name": "Conic Sections"}, {"class": "Class 11", "name": "Introduction to Three-Dimensional Geometry"}, {"class": "Class 12", "name": "Continuity and Differentiability"}, {"class": "Class 12", "name": "Applications of Derivatives"}, {"class": "Class 12", "name": "Integrals"}, {"class": "Class 12", "name": "Applications of Integrals"}, {"class": "Class 12", "name": "Differential Equations"}, {"class": "Class 12", "name": "Vector Algebra"}, {"class": "Class 12", "name": "Three-Dimensional Geometry"}, {"class": "Class 12", "name": "Linear Programming"}, {"class": "Class 12", "name": "Probability"}]};
+const KEY="jee-main-2027-tracker-v1";
+const empty=()=>({theory:false,pyqs:false,revision:false,status:"Not Started",priority:"High",target:"",resource:"",notes:""});
+let data=loadData(), activeSubject=null, activeTab="all", deferredPrompt=null;
+data={chapters:{},focus:"",date:"",dailyNotes:"",examDate:"",timetable:[],tests:[],targets:{},mistakes:[],revisions:[],studyDays:{},confidence:{},...data};
+data.timetable ||= []; data.tests ||= []; data.targets ||= {}; data.mistakes ||= []; data.revisions ||= []; data.studyDays ||= {}; data.confidence ||= {}; data.weightCounts ||= {};
+function loadData(){try{return JSON.parse(localStorage.getItem(KEY))||{chapters:{},focus:"",date:"",dailyNotes:"",examDate:"",timetable:[],tests:[],targets:{},mistakes:[],revisions:[],studyDays:{},confidence:{}}}catch(e){return {chapters:{},focus:"",date:"",dailyNotes:"",examDate:"",timetable:[],tests:[],targets:{},mistakes:[],revisions:[],studyDays:{},confidence:{}}}}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));renderDashboard();if(activeSubject)renderChapters()}
+function stateKey(s,i){return s+"::"+i}
+function getState(s,i){let k=stateKey(s,i);if(!data.chapters[k])data.chapters[k]=empty();return data.chapters[k]}
+function stats(s){let arr=CHAPTERS[s].map((_,i)=>getState(s,i));let tasks=arr.reduce((n,x)=>n+Number(x.theory)+Number(x.pyqs)+Number(x.revision),0);let mastered=arr.filter(x=>x.theory&&x.pyqs&&x.revision).length;return {total:arr.length,tasks,mastered,pct:arr.length?Math.round(tasks/(arr.length*3)*100):0,revisionPending:arr.filter(x=>!x.revision).length}}
+function renderDashboard(){
+ let total=0,tasks=0,mastered=0,rev=0;
+ for(let s of Object.keys(CHAPTERS)){let a=stats(s);total+=a.total;tasks+=a.tasks;mastered+=a.mastered;rev+=a.revisionPending}
+ document.getElementById("totalChapters").textContent=total;document.getElementById("mastered").textContent=mastered;document.getElementById("tasksDone").textContent=tasks+" / "+(total*3);document.getElementById("revisionPending").textContent=rev;document.getElementById("heroPercent").textContent=Math.round(tasks/(total*3)*100)+"%";
+ let icons={Physics:["⚛️","physics"],Chemistry:["🧪","chemistry"],Mathematics:["📐","math"]};
+ document.getElementById("subjectCards").innerHTML=Object.keys(CHAPTERS).map(s=>{let a=stats(s),ic=icons[s];return `<article class="subject-card" data-subject="${s}"><div class="subject-top"><div class="subject-icon ${ic[1]}">${ic[0]}</div><span class="badge">${a.mastered}/${a.total} mastered</span></div><h3>${s}</h3><small>${a.tasks} of ${a.total*3} tasks completed</small><div class="progress"><span style="width:${a.pct}%"></span></div><div class="subject-bottom"><span>${a.pct}% complete</span><strong style="color:var(--blue)">Open →</strong></div></article>`}).join("");
+ document.querySelectorAll("[data-subject]").forEach(el=>el.addEventListener("click",()=>openSubject(el.dataset.subject)));
+}
+function openSubject(s){activeSubject=s;activeTab="all";document.getElementById("trackerPanel").classList.remove("hidden");document.getElementById("trackerTitle").textContent=s+" tracker";document.getElementById("trackerSubtitle").textContent=CHAPTERS[s].length+" chapters · Theory · PYQs · Revision";document.getElementById("searchInput").value="";document.getElementById("classFilter").value="All";document.getElementById("statusFilter").value="All";document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab==="all"));renderChapters();document.getElementById("trackerPanel").scrollIntoView({behavior:"smooth",block:"start"})}
+function renderChapters(){
+ if(!activeSubject)return;let s=activeSubject,a=stats(s),search=document.getElementById("searchInput").value.toLowerCase(),cl=document.getElementById("classFilter").value,st=document.getElementById("statusFilter").value;
+ document.getElementById("subjectProgress").style.width=a.pct+"%";document.getElementById("subjectProgressText").textContent=a.pct+"% task completion";let shown=0;
+ let html=CHAPTERS[s].map((ch,i)=>({ch,i,st:getState(s,i)})).filter(o=>(cl==="All"||o.ch.class===cl)&&(st==="All"||o.st.status===st)&&o.ch.name.toLowerCase().includes(search)&&(activeTab==="all"||(activeTab==="pending"&&!(o.st.theory&&o.st.pyqs&&o.st.revision))||(activeTab==="completed"&&(o.st.theory&&o.st.pyqs&&o.st.revision)))).map(o=>{shown++;let x=o.st;return `<div class="chapter"><div class="chapter-main"><h4>${o.i+1}. ${o.ch.name}</h4><small>${o.ch.class} · ${x.priority} priority</small></div><label class="tick"><input type="checkbox" data-i="${o.i}" data-k="theory" ${x.theory?"checked":""}> Theory</label><label class="tick"><input type="checkbox" data-i="${o.i}" data-k="pyqs" ${x.pyqs?"checked":""}> PYQs</label><label class="tick"><input type="checkbox" data-i="${o.i}" data-k="revision" ${x.revision?"checked":""}> Revision</label><div class="status-wrap"><select class="status" data-i="${o.i}" data-k="status">${["Not Started","Learning","Practising","Revision Due","Completed"].map(v=>`<option ${x.status===v?"selected":""}>${v}</option>`).join("")}</select></div><div class="status-wrap"><select class="status" data-i="${o.i}" data-k="priority">${["High","Medium","Low"].map(v=>`<option ${x.priority===v?"selected":""}>${v}</option>`).join("")}</select></div><div class="status-wrap"><input class="status" type="date" data-i="${o.i}" data-k="target" value="${x.target||""}" aria-label="Target date"></div><div class="status-wrap"><input class="status" data-i="${o.i}" data-k="resource" value="${escapeAttr(x.resource||"")}" placeholder="Resource / lecture link"></div><div class="status-wrap"><input class="status" data-i="${o.i}" data-k="notes" value="${escapeAttr(x.notes||"")}" placeholder="Doubts / notes"></div><div class="status-wrap"><span class="badge ${x.theory&&x.pyqs&&x.revision?"done":""}">${x.theory&&x.pyqs&&x.revision?"MASTERED":"IN PROGRESS"}</span></div></div>`}).join("");
+ document.getElementById("chapterList").innerHTML=html||'<div class="empty">No chapters match these filters.</div>';document.getElementById("chapterCount").textContent=shown+" chapters shown";
+ document.querySelectorAll("#chapterList [data-i]").forEach(el=>el.addEventListener("change",()=>{let x=getState(s,+el.dataset.i),k=el.dataset.k;x[k]=el.type==="checkbox"?el.checked:el.value;if(k==="theory"||k==="pyqs"||k==="revision"){if(el.checked)data.studyDays[todayKey()]=true;if(x.theory&&x.pyqs&&x.revision)x.status="Completed";else if(x.status==="Completed")x.status="Learning"}save()}));
+ document.querySelectorAll("#chapterList input[data-k='resource'],#chapterList input[data-k='notes']").forEach(el=>el.addEventListener("change",()=>{getState(s,+el.dataset.i)[el.dataset.k]=el.value;localStorage.setItem(KEY,JSON.stringify(data))}));
+}
+function escapeAttr(s){return String(s).replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
+document.getElementById("backBtn").onclick=()=>{activeSubject=null;document.getElementById("trackerPanel").classList.add("hidden");document.getElementById("trackerTitle").textContent="Chapter tracker";document.getElementById("trackerSubtitle").textContent="Choose a subject above to get started.";window.scrollTo({top:0,behavior:"smooth"})};
+["searchInput","classFilter","statusFilter"].forEach(id=>document.getElementById(id).addEventListener(id==="searchInput"?"input":"change",renderChapters));
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{activeTab=b.dataset.tab;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));renderChapters()}));
+document.getElementById("focusInput").value=data.focus||"";document.getElementById("dateInput").value=data.date||"";document.getElementById("notesInput").value=data.dailyNotes||"";
+document.getElementById("saveNotes").onclick=()=>{data.focus=document.getElementById("focusInput").value;data.date=document.getElementById("dateInput").value;data.dailyNotes=document.getElementById("notesInput").value;localStorage.setItem(KEY,JSON.stringify(data));document.getElementById("savedMsg").textContent="Saved on this device ✓";setTimeout(()=>document.getElementById("savedMsg").textContent="",2500)};
+document.getElementById("exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="jee-tracker-2027-backup.json";a.click();URL.revokeObjectURL(a.href)};
+document.getElementById("importBtn").onclick=()=>document.getElementById("importFile").click();
+document.getElementById("importFile").onchange=async e=>{try{let f=e.target.files[0];if(!f)return;let parsed=JSON.parse(await f.text());if(!parsed.chapters)throw Error();data=parsed;localStorage.setItem(KEY,JSON.stringify(data));location.reload()}catch(err){alert("That backup file could not be read.")}};
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;document.getElementById("installBtn").hidden=false});
+document.getElementById("installBtn").onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;document.getElementById("installBtn").hidden=true}else alert("Open your browser menu and choose Install app or Add to Home Screen.")};
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+
+function todayKey(){let d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function markStudy(){data.studyDays[todayKey()]=true;localStorage.setItem(KEY,JSON.stringify(data))}
+function dayDiff(a,b){return Math.floor((new Date(b+"T00:00:00")-new Date(a+"T00:00:00"))/86400000)}
+function calcStreak(){let n=0,d=new Date();let key=d.toISOString().slice(0,10);if(!data.studyDays[key])d.setDate(d.getDate()-1);for(let i=0;i<400;i++){let k=d.toISOString().slice(0,10);if(!data.studyDays[k])break;n++;d.setDate(d.getDate()-1)}return n}
+function refreshCountdown(){
+ const d=data.examDate;let label="Set your exam date",detail="The date is editable; no unannounced exam date is assumed.";
+ if(d){let n=dayDiff(todayKey(),d);label=n>0?`${n} days to go`:n===0?"Exam day":`${Math.abs(n)} days past`;detail=n<0?"Update the date if you are tracking another session.":"Countdown uses the date saved below."}
+ document.getElementById("examCountdown").textContent=label;document.getElementById("examCountdownNote").textContent=detail;
+ document.getElementById("widgetCountdown").textContent=label;
+ document.getElementById("streakCount").textContent=calcStreak()+" day"+(calcStreak()===1?"":"s")+" 🔥";
+ document.getElementById("streakNote").textContent=calcStreak()?"Keep your routine steady.":"Complete a study action today to start your streak.";
+ document.getElementById("streakBar").style.width=Math.min(100,calcStreak()/7*100)+"%";
+}
+function renderTimetable(){
+ const el=document.getElementById("timetableList");let rows=[...data.timetable].sort((a,b)=>a.time.localeCompare(b.time));
+ el.innerHTML=rows.length?rows.map((x,i)=>`<div class="task-row"><input type="checkbox" data-tt="${i}" ${x.done?"checked":""}><div style="flex:1"><b>${escapeAttr(x.time)} · ${escapeAttr(x.subject)}</b><div class="sub">${escapeAttr(x.task)} · ${x.duration} min</div></div><button class="btn small-btn" data-ttdel="${i}">Delete</button></div>`).join(""):'<div class="empty">No timetable blocks yet. Add your first study block above.</div>';
+ el.querySelectorAll("[data-tt]").forEach(e=>e.onchange=()=>{rows[+e.dataset.tt].done=e.checked;if(e.checked)markStudy();data.timetable=rows;persistRender()});
+ el.querySelectorAll("[data-ttdel]").forEach(e=>e.onclick=()=>{rows.splice(+e.dataset.ttdel,1);data.timetable=rows;persistRender()});
+}
+function renderTests(){
+ document.getElementById("testRows").innerHTML=data.tests.length?[...data.tests].sort((a,b)=>b.date.localeCompare(a.date)).map((t,i)=>`<tr><td>${escapeAttr(t.date)}</td><td>${escapeAttr(t.name)}</td><td>${t.p}</td><td>${t.c}</td><td>${t.m}</td><td><b>${t.p+t.c+t.m}</b></td><td><button class="btn small-btn" data-testdel="${i}">×</button></td></tr>`).join(""):'<tr><td colspan="7" class="empty">No mock tests recorded yet.</td></tr>';
+ document.querySelectorAll("[data-testdel]").forEach(e=>e.onclick=()=>{{let target=[...data.tests].sort((a,b)=>b.date.localeCompare(a.date))[+e.dataset.testdel];data.tests=data.tests.filter(t=>t!==target);persistRender()}});
+}
+function renderTargets(){
+ let names=["Physics","Chemistry","Mathematics"];
+ document.getElementById("targetControls").innerHTML=names.map(s=>{let x=data.targets[s]||{goal:30,done:0};return `<div class="form-row"><div class="field"><label>${s.toUpperCase()} TARGET</label><input type="number" min="0" data-goal="${s}" value="${x.goal}"></div><div class="field"><label>COMPLETED</label><input type="number" min="0" data-done="${s}" value="${x.done}"></div></div>`}).join("");
+ let total=0,done=0;names.forEach(s=>{let x=data.targets[s]||{goal:30,done:0};total+=+x.goal;done+=+x.done});
+ document.getElementById("questionProgress").textContent=done+" / "+total;document.getElementById("questionBar").style.width=(total?Math.min(100,done/total*100):0)+"%";document.getElementById("questionProgressNote").textContent=total?Math.round(done/total*100)+"% of today's target completed":"Set your targets.";
+}
+function renderWeightage(){
+ let s=document.getElementById("weightSubject").value||"Physics",q=document.getElementById("weightSearch").value.toLowerCase();
+ let rows=CHAPTERS[s].map((c,i)=>({c,i})).filter(o=>o.c.name.toLowerCase().includes(q));
+ document.getElementById("weightRows").innerHTML=rows.map(o=>{let key=s+"::"+o.i,priority=data.confidence[key]||"Not set",count=data.weightCounts[key]??"";return `<tr><td>${escapeAttr(o.c.name)}</td><td><input class="status" type="number" min="0" step="1" placeholder="Enter PYQ count" data-wcount="${key}" value="${count}"></td><td>${priority}</td><td><select class="status" data-conf="${key}"><option>Not set</option><option ${priority==="Low"?"selected":""}>Low</option><option ${priority==="Medium"?"selected":""}>Medium</option><option ${priority==="High"?"selected":""}>High</option></select></td></tr>`}).join("");
+ document.querySelectorAll("[data-conf]").forEach(e=>e.onchange=()=>{data.confidence[e.dataset.conf]=e.value;persistRender(false)});
+ document.querySelectorAll("[data-wcount]").forEach(e=>e.onchange=()=>{data.weightCounts[e.dataset.wcount]=Math.max(0,+e.value||0);localStorage.setItem(KEY,JSON.stringify(data))});
+}
+function renderMistakes(){
+ document.getElementById("mistakeRows").innerHTML=data.mistakes.length?[...data.mistakes].reverse().map((m,i)=>`<tr><td>${escapeAttr(m.date)}</td><td>${escapeAttr(m.subject)}<br>${escapeAttr(m.chapter)}</td><td>${escapeAttr(m.type)}<br><span class="sub">${escapeAttr(m.what)}</span></td><td>${escapeAttr(m.fix)}</td><td><button class="btn small-btn" data-mistakedel="${i}">×</button></td></tr>`).join(""):'<tr><td colspan="5" class="empty">Your mistake notebook is empty.</td></tr>';
+ document.querySelectorAll("[data-mistakedel]").forEach(e=>e.onclick=()=>{data.mistakes.splice(data.mistakes.length-1-(+e.dataset.mistakedel),1);persistRender()});
+}
+function updateRevisionChapters(){
+ let s=document.getElementById("revSubject").value,sel=document.getElementById("revChapter"),old=sel.value;
+ sel.innerHTML=CHAPTERS[s].map((c,i)=>`<option value="${i}">${escapeAttr(c.name)}</option>`).join("");if(old)sel.value=old;
+}
+function sendDueRevisionAlerts(){
+ if(!("Notification" in window)||Notification.permission!=="granted")return;
+ let due=data.revisions.filter(r=>r.date<=todayKey());
+ let fresh=due.filter(r=>r.lastAlerted!==todayKey());
+ if(fresh.length){
+  new Notification("JEE Tracker · Revision due",{body:fresh.length===1?`${fresh[0].subject}: ${CHAPTERS[fresh[0].subject][fresh[0].index]?.name||"Chapter"}`:`${fresh.length} revision reminders are due today.`});
+  fresh.forEach(r=>r.lastAlerted=todayKey());localStorage.setItem(KEY,JSON.stringify(data));
+ }
+}
+function renderRevisions(){
+ let list=[...data.revisions].sort((a,b)=>a.date.localeCompare(b.date));
+ document.getElementById("revisionList").innerHTML=list.length?list.map((r,i)=>`<div class="reminder-item"><div><b>${escapeAttr(r.date)} · ${escapeAttr(r.subject)}</b><div class="sub">${escapeAttr(CHAPTERS[r.subject][r.index]?.name||"Chapter")}</div></div><div><button class="btn small-btn" data-revdone="${i}">Done</button> <button class="btn small-btn" data-revdel="${i}">×</button></div></div>`).join(""):'<div class="empty">No revision reminders scheduled.</div>';
+ document.querySelectorAll("[data-revdone]").forEach(e=>e.onclick=()=>{let r=list[+e.dataset.revdone];let x=getState(r.subject,r.index);x.revision=true;x.status=x.theory&&x.pyqs?"Completed":"Revision Due";markStudy();data.revisions=data.revisions.filter(y=>!(y.subject===r.subject&&y.index===r.index&&y.date===r.date));persistRender()});
+ document.querySelectorAll("[data-revdel]").forEach(e=>e.onclick=()=>{let r=list[+e.dataset.revdel];data.revisions=data.revisions.filter(y=>y!==r);persistRender()});
+ let due=list.filter(r=>r.date<=todayKey());let next=due[0]||list[0];
+ document.getElementById("widgetRevision").textContent=next?`${due.length?"Due now":"Next revision"}: ${next.subject} · ${CHAPTERS[next.subject][next.index]?.name||"Chapter"} (${next.date})`:"No revision reminders yet";
+}
+function renderReports(){
+ let tests=[...data.tests].sort((a,b)=>a.date.localeCompare(b.date)).slice(-7),max=Math.max(300,...tests.map(t=>t.p+t.c+t.m));
+ document.getElementById("scoreChart").innerHTML=tests.length?tests.map(t=>{let v=t.p+t.c+t.m;return `<div class="bar-col"><b style="font-size:10px">${v}</b><div class="bar" style="height:${Math.max(3,v/max*105)}px"></div><small>${escapeAttr(t.date.slice(5))}</small></div>`}).join(""):'<div class="empty" style="width:100%">Add mock tests to see your trend.</div>';
+ document.getElementById("scoreChartNote").textContent=tests.length?"Latest "+tests.length+" mock tests · score out of 300":"Add mock tests to see your trend.";
+ let week=Object.keys(data.studyDays).filter(k=>dayDiff(k,todayKey())>=0&&dayDiff(k,todayKey())<7).length;
+ let taskCount=0;Object.values(data.chapters).forEach(x=>{taskCount+=Number(x.theory)+Number(x.pyqs)+Number(x.revision)});
+ document.getElementById("weeklyTasks").textContent=week+" active days";
+ document.getElementById("weeklyReportDetails").innerHTML=`<div class="task-row">Active study days: <b>${week}/7</b></div><div class="task-row">Chapter tasks completed: <b>${taskCount}</b></div><div class="task-row">Mock tests logged: <b>${data.tests.filter(t=>dayDiff(t.date,todayKey())>=0&&dayDiff(t.date,todayKey())<7).length}</b></div><div class="task-row">Revision items due: <b>${data.revisions.filter(r=>r.date<=todayKey()).length}</b></div>`;
+}
+function persistRender(all=true){localStorage.setItem(KEY,JSON.stringify(data));refreshCountdown();renderTimetable();renderTests();renderTargets();renderWeightage();renderMistakes();renderRevisions();renderReports();renderDashboard();if(activeSubject)renderChapters()}
+function initFeatures(){
+ document.getElementById("examDate").value=data.examDate||"";
+ document.getElementById("widgetFocus").textContent="Today's focus: "+(data.focus||"Add a study focus");
+ document.getElementById("saveExamDate").onclick=()=>{data.examDate=document.getElementById("examDate").value;persistRender()};
+ document.getElementById("addTimetable").onclick=()=>{let time=document.getElementById("ttTime").value,task=document.getElementById("ttTask").value.trim();if(!time||!task){alert("Add a time and activity.");return}data.timetable.push({time,subject:document.getElementById("ttSubject").value,task,duration:Math.max(5,+document.getElementById("ttDuration").value||60),done:false});document.getElementById("ttTask").value="";persistRender()};
+ document.getElementById("addTest").onclick=()=>{let date=document.getElementById("testDate").value,name=document.getElementById("testName").value.trim(),p=+document.getElementById("testP").value,c=+document.getElementById("testC").value,m=+document.getElementById("testM").value;if(!date||!name||[p,c,m].some(v=>!Number.isFinite(v)||v<0||v>100)){alert("Enter a date, test name and subject marks from 0 to 100.");return}data.tests.push({id:Date.now()+Math.random(),date,name,p,c,m});document.getElementById("testName").value="";persistRender()};
+ document.getElementById("saveTargets").onclick=()=>{["Physics","Chemistry","Mathematics"].forEach(s=>{data.targets[s]={goal:Math.max(0,+document.querySelector(`[data-goal="${s}"]`).value||0),done:Math.max(0,+document.querySelector(`[data-done="${s}"]`).value||0)}});data.targetNote=document.getElementById("targetNote").value;markStudy();persistRender()};
+ document.getElementById("addMistake").onclick=()=>{let chapter=document.getElementById("mistakeChapter").value.trim(),what=document.getElementById("mistakeWhat").value.trim(),fix=document.getElementById("mistakeFix").value.trim();if(!chapter||!what||!fix){alert("Add the chapter, what went wrong, and the correction.");return}data.mistakes.push({date:document.getElementById("mistakeDate").value||todayKey(),subject:document.getElementById("mistakeSubject").value,chapter,type:document.getElementById("mistakeType").value,what,fix});["mistakeChapter","mistakeWhat","mistakeFix"].forEach(id=>document.getElementById(id).value="");persistRender()};
+ document.getElementById("revSubject").onchange=updateRevisionChapters;updateRevisionChapters();
+ document.getElementById("addRevision").onclick=()=>{let subject=document.getElementById("revSubject").value,index=+document.getElementById("revChapter").value,date=document.getElementById("revDate").value;if(!date){alert("Choose a revision date.");return}data.revisions.push({subject,index,date});persistRender()};
+ document.getElementById("weightSubject").onchange=renderWeightage;document.getElementById("weightSearch").oninput=renderWeightage;
+ document.getElementById("enableNotifications").onclick=async()=>{if(!("Notification" in window)){document.getElementById("notificationStatus").textContent="Notifications are not supported in this browser.";return}let p=await Notification.requestPermission();document.getElementById("notificationStatus").textContent=p==="granted"?"Due-revision alerts can appear when you open the app.":"Notification permission not granted.";sendDueRevisionAlerts()};
+ document.getElementById("featureNav").querySelectorAll("button").forEach(b=>b.onclick=()=>{document.querySelectorAll("#featureNav button").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".feature-section[id^='feature-']").forEach(x=>x.classList.toggle("hidden",x.id!=="feature-"+b.dataset.feature));document.getElementById("feature-"+b.dataset.feature).scrollIntoView({behavior:"smooth",block:"start"})});
+ document.getElementById("focusInput").addEventListener("change",()=>{data.focus=document.getElementById("focusInput").value;persistRender()});
+ document.getElementById("saveNotes").addEventListener("click",()=>{data.focus=document.getElementById("focusInput").value;document.getElementById("widgetFocus").textContent="Today's focus: "+(data.focus||"Add a study focus");});
+ document.getElementById("testDate").value=todayKey();document.getElementById("mistakeDate").value=todayKey();document.getElementById("revDate").value=todayKey();
+ persistRender();
+}
+
+initFeatures();
+renderDashboard();
+</script>
+</body></html>
